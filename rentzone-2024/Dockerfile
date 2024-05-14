@@ -94,7 +94,10 @@ RUN rm -rf $REPOSITORY_NAME
 # Enable the mod_rewrite setting in the httpd.conf file
 RUN sed -i '/<Directory "\/var\/www\/html">/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/httpd/conf/httpd.conf
 
-# Give full access to the /var/www/html directory
+# Change ownership to apache user and group
+RUN chown -R apache:apache /var/www/html
+
+# Set permissions to 755 for the directory
 RUN chmod -R 777 /var/www/html
 
 # Give full access to the storage directory
